@@ -60,20 +60,33 @@ namespace PrimeCalculator
 
             foreach(ArrayList a in primeFactors)
             {
+                string chosen = "";
                 int spacing = (int)a[0];
                 while(spacing < 1000)
                 {
-                    output += " ";
+                    chosen += " ";
                     spacing = spacing * 10;
                 }
-                output += "   " + a[0] + " : ";
+                chosen += "   " + a[0] + " : ";
 
                 for(int i = 1; i < a.Count; i++)
                 {
-                    output += a[i] + " ";
+                    chosen += a[i] + " ";
                 }
 
-                output += "\r\n";
+                chosen += "\r\n";
+
+                for (int b = 0; b < a.Count; b++)
+                {
+                    for (int c = b + 1; c < a.Count; c++)
+                    {
+                        if (a[b] == a[c] || a.Count == 2)
+                        {
+                            chosen = "";
+                        }
+                    }
+                }
+                output+= chosen;
             }
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("test.txt", false))
